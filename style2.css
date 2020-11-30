@@ -1,0 +1,188 @@
+html,
+
+
+@font-face {
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    src: url('PTS55F-webfont.eot');
+    src: url('PTS55F-webfont.eot?#iefix') format('embedded-opentype'),
+         url('PTS55F-webfont.woff') format('woff'),
+         url('PTS55F-webfont.ttf') format('truetype'),
+         url('PTS55F-webfont.svg#PTS55F') format('svg');
+}
+
+
+body {
+width=80%
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+background-color:#ffffff ; 
+background-position:center bottom;
+color:  #434343 ; 
+}
+
+
+.fond {
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	margin: auto;
+	padding: 15px;
+	background-color:#ffffff ;
+color: #434343;
+}
+
+
+
+
+
+
+.menu {
+width:100%;
+background-color:#ffffff ;
+padding: 10px;
+}
+
+.menu 
+ul {
+list-style-type: none;
+ display: flex;
+ justify-content: space-around;
+ }
+
+
+
+h1 {
+
+ font-size: 200%;
+ 
+color: #434343 ;
+ 
+text-align: center;
+
+ }
+
+
+
+li {
+
+color: #434343;
+}
+
+
+a.type0 {
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+display:flex;
+width:120px;
+ float:left;      
+ border-bottom: 3px solid #d02630; 
+color: #d02630
+;
+text-decoration:none;
+text-align:center;
+ padding:5px;
+}
+
+a.type0:hover,a.type0:focus, a.type0:active {
+
+    /* Les liens au survol, au focus, et actifs : on leur donne la couleur rouge pour l'exemple */
+display:flex;
+ float:left;   
+ border-bottom: 3px solid #d02630;  
+width:120px; 
+color: #d02630;
+
+font-weight:bold;
+}
+
+
+
+a.type2 { 
+
+color : #d02630;
+text-decoration:none;
+
+}
+
+a.type2:hover {
+color : #d02630;
+text-decoration:none;
+
+font-weight:bold;
+}
+
+
+
+h2 {
+
+ color:#434343;
+}
+
+.encadre {
+padding-left: 2%;
+margin-left: 0px;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;  
+border-left: 5px solid #d02630; 
+	background-color:#ffffff ;
+color: #434343;
+}
+
+
+
+h3 {
+
+ color: #434343;
+}
+
+
+
+
+article {
+ 
+color: #434343;
+
+}
+
+img {
+margin: 5px;
+}
+
+
+footer {
+ 
+position: absolute;
+ 
+bottom:0;
+ 
+width: 99%;
+
+}
+
+
+
+#foot1 {
+ 
+background-color: #574c52;
+ 
+color: #F0F0F0;
+
+}
+
+
+
+#foot2 {
+
+ background-color: #324c98;
+
+ border-width:1px;
+
+ border-style:solid;
+
+ border-color:#324c98;
+
+ border-radius:0 0 15px 15px;
+
+ clear:both;
+
+ bottom: 0;
+
+}
