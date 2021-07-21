@@ -50,7 +50,7 @@ justify-content: space-around;
  }
 
 hearder {
-  back-ground-image: url("testpavage_plan.svg");
+  background-image: url("../testpavage_plan.svg");
 }
 
 h1 {
