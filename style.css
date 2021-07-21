@@ -11,6 +11,12 @@ font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 
+hearder {
+  background-image: url('testpavage_disque.svg');
+  
+}
+
+
 body {
 width=80%
 font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -48,11 +54,6 @@ list-style-type: none;
  display: flex;
 justify-content: space-around;
  }
-
-hearder {
-  background-image: url("../testpavage_disque.svg");
-  
-}
 
 h1 {
 
