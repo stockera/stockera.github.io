@@ -12,8 +12,9 @@ font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 
 
 hearder {
-  background-image: url('testpavage_disque.svg');
-  
+background-image: url('testpavage_disque.svg');
+background-position: left bottom;
+background-repeat: repeat;
 }
 
 
