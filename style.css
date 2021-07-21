@@ -22,7 +22,7 @@ color:  #434343 ;
 
 
 .entete {
-background-size: cover;
+height: 100%;
 background: url("../testpavage_disque.svg");
 background-repeat: repeat;
 box-sizing: border-box;
