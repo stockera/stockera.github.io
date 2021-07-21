@@ -23,7 +23,7 @@ color:  #434343 ;
 
 .entete {
 background-image: url("../testpavage_disque.svg");
-background-position: center;
+background-position: center bottom;
 background-repeat: repeat;
 }
 
