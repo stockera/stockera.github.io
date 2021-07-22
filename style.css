@@ -23,22 +23,22 @@ color:  #434343 ;
 
 /* Change navbar styling on scroll */
 .navbar.active {
-    background: #555;
+    background: #555555;
     box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navbar.active .nav-link {
-    color: #fff;
+    color: #ffffff;
 }
 
 .navbar.active .nav-link:hover,
 .navbar.active .nav-link:focus {
-    color: #fff;
+    color: #ffffff;
     text-decoration: none;
 }
 
 .navbar.active .navbar-brand {
-    color: #fff;
+    color: #ffffff;
 }
 
 
