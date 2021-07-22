@@ -1,6 +1,7 @@
-$(function () {
+$(  var hauteurScroll = document.getElementById("jumb").offsetHeight;
+    function () {
     $(window).on('scroll', function () {
-        if ( $(window).scrollTop() > 10 ) {
+        if ( $(window).scrollTop() > hauteurScroll ) {
             $('.navbar').removeClass('navbar-light');
             $('.navbar').addClass('navbar-dark');
             $('.navbar').addClass('bg-dark');
