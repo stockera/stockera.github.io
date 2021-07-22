@@ -1,6 +1,6 @@
-$(  var hauteurScroll = document.getElementById("jumb").offsetHeight;
-    function () {
+$( function () {
     $(window).on('scroll', function () {
+        var hauteurScroll = document.getElementById("jumb").offsetHeight;
         if ( $(window).scrollTop() > hauteurScroll ) {
             $('.navbar').removeClass('navbar-light');
             $('.navbar').addClass('navbar-dark');
