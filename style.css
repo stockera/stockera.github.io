@@ -1,25 +1,6 @@
-html,
-
-
-@font-face {
-font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    src: url('PTS55F-webfont.eot');
-    src: url('PTS55F-webfont.eot?#iefix') format('embedded-opentype'),
-         url('PTS55F-webfont.woff') format('woff'),
-         url('PTS55F-webfont.ttf') format('truetype'),
-         url('PTS55F-webfont.svg#PTS55F') format('svg');
-}
-
-
-
-body {
-
-}
-
-.nav
-ul {
-list-style-type: none;
- display: flex;
-justify-content: space-around;
-text-algin: right;
- }
+@media (min-width: 800px) and (max-width: 850px) {
+            .navbar:not(.top-nav-collapse) {
+                background: #1C2331!important;
+            }
+        }
+.view,body,html{height:100%}.navbar{background-color:rgba(0,0,0,.2)}.page-footer,.top-nav-collapse{background-color:#1C2331}@media only screen and (max-width:768px){.navbar{background-color:#1C2331}}
