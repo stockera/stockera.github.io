@@ -3,10 +3,10 @@ html,
 
 
 
-body {
+/*body {
 color:  #434343 ; 
 }
-
+*/
 
 /* Change navbar styling on scroll */
 .navbar.active {
@@ -29,6 +29,9 @@ color:  #434343 ;
 }
 
 
+.jumbotron{
+ background-color: #CDCDC0;   
+}
 .jumbotron h1 {
 
  font-size: 3rem;
