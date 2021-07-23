@@ -3,11 +3,11 @@ html,
 
 
 body {
-color:  #626D71 ; 
+color:  #434343 ; 
 }
 
 .navbar-light .navbar-brand {
-    color: #626D71;
+    color: #ffffff;
 }
 
 .navbar-light .navbar-brand:hover {
@@ -15,14 +15,15 @@ color:  #626D71 ;
 }
 
 .navbar-light .navbar-nav .nav-link {
-    color: #626D71;
+    color: #ffffff;
 }
 .navbar-light .navbar-nav .nav-link:hover {
     color: #ffffff;
+    font-weight:bold;
 }
 
 .bg-scroll {
- background-color:  #CDCDC0;  
+ background-color:  #426E86;  
 }
 /* Change navbar styling on scroll */
 /*.navbar.active {
@@ -46,13 +47,13 @@ color:  #626D71 ;
 
 
 .jumbotron{
- background-color: #CDCDC0;   
+ background-color: #426E86;   
 }
 .jumbotron h1 {
 
  font-size: 3rem;
  
-color: #626D71 ;
+color: #ffffff ;
 
  }
 
@@ -65,10 +66,6 @@ border-color: #B38867;
 border-radius: 0.1875rem;
 }
 
-li {
-
-color: #434343;
-}
 
 h2,h3,h4 {
    color: #B38867 
