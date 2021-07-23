@@ -1,24 +1,11 @@
 html,
 
 
-@font-face {
-font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    src: url('PTS55F-webfont.eot');
-    src: url('PTS55F-webfont.eot?#iefix') format('embedded-opentype'),
-         url('PTS55F-webfont.woff') format('woff'),
-         url('PTS55F-webfont.ttf') format('truetype'),
-         url('PTS55F-webfont.svg#PTS55F') format('svg');
-}
 
 
 body {
-width=80%
-font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-background-color:#ffffff ; 
-background-position:center bottom;
 color:  #434343 ; 
 }
-
 
 
 /* Change navbar styling on scroll */
@@ -42,13 +29,9 @@ color:  #434343 ;
 }
 
 
-
-
-
-
 h1 {
 
- font-size: 200%;
+ font-size: 45pt;
  
 color: #434343 ;
  
