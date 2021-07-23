@@ -37,6 +37,7 @@ color: #434343 ;
  }
 
 hr.small{
+box-sizing: content-box;
 -webkit-box-shadow: 1px 1px 3px #000;
 max-width: 6.25rem;
 margin: 1rem auto;
