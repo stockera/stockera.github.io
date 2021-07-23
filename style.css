@@ -72,6 +72,11 @@ h2,h3,h4,h5 {
     
 }
 
+.btn-link, .btn-link:hover, .btn-link:focus {
+    color: #B38867;
+    text-decoration: none;
+}
+
 a.text { 
 
 color : #426E86;
