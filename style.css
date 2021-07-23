@@ -28,6 +28,16 @@ color:  #434343 ;
     color: #ffffff;
 }
 
+.separateur {
+ background-color: #434343;
+cursor: default;
+display: inline-block;
+height: 2px;
+position: relative;
+vertical-align: middle;
+width: 2px;
+}
+
 .jumbotron h1 {
 
  font-size: 3rem;
