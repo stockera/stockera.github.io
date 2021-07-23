@@ -28,17 +28,13 @@ color:  #434343 ;
     color: #ffffff;
 }
 
+.jumbotron h1 {
 
-h1 {
-
- font-size: 45pt;
+ font-size: 3rem;
  
 color: #434343 ;
- 
-text-align: center;
 
  }
-
 
 
 li {
