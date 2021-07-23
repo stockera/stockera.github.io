@@ -14,11 +14,10 @@ color:  #626D71 ;
     color: #ffffff;
 }
 
-.navbar-light .nav-link {
+.navbar-light .navbar-nav .nav-link {
     color: #626D71;
 }
-
-.navbar-light .nav-link:hover {
+.navbar-light .navbar-nav .nav-link:hover {
     color: #ffffff;
 }
 
