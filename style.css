@@ -36,6 +36,14 @@ color: #434343 ;
 
  }
 
+hr.small{
+-webkit-box-shadow: 1px 1px 3px #000;
+max-width: 6.25rem;
+margin: 1rem auto;
+border-width: 0.25rem;
+border-color: inherit;
+border-radius: 0.1875rem;
+}
 
 li {
 
