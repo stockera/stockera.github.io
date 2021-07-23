@@ -6,6 +6,21 @@ body {
 color:  #626D71 ; 
 }
 
+.navbar-light .navbar-brand {
+    color: #626D71;
+}
+
+.navbar-light .navbar-brand:hover {
+    color: #ffffff;
+}
+
+.navbar-light .nav-link {
+    color: #626D71;
+}
+
+.navbar-light .nav-link:hover {
+    color: #ffffff;
+}
 /* Change navbar styling on scroll */
 .navbar.active {
     background: #555555;
