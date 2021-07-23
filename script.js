@@ -1,7 +1,8 @@
 $( function () {
     $(window).on('scroll', function () {
-        var hauteurScroll = document.getElementById("jumb").offsetHeight;
-        if ( $(window).scrollTop() > hauteurScroll ) {
+        var hauteurJumb = document.getElementById("jumb").offsetHeight;
+        var hauteurNav = document.getElementById("Nav").offsetHeight;
+        if ( $(window).scrollTop() > hauteurJumb-hauteurNav ) {
             $('.navbar').removeClass('navbar-light');
             $('.navbar').addClass('navbar-dark');
             $('.navbar').addClass('bg-dark');
