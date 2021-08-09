@@ -41,8 +41,9 @@ padding-top:100px;
   background-color: #fefefe;
   margin: auto;
   padding: 0;
-  width: 40%;
-  max-width: 1200px;
+  max-width: 90%;
+  width: auto;
+  min-width: 300px;
 }
 
 /* The Close Button */
