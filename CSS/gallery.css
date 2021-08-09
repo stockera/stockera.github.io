@@ -22,7 +22,7 @@ body {
 }
 
 /* The Modal (background) */
-.modal {
+.gallery {
   display: none;
   position: fixed;
   z-index: 1;
@@ -62,7 +62,7 @@ padding-top:100px;
   cursor: pointer;
 }
 
-.mySlides {
+.Slides {
   display: none;
 }
 
