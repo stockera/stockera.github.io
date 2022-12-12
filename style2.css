@@ -1,0 +1,92 @@
+html,
+
+
+
+body {
+color:  #434343 ; 
+}
+
+.navbar-dark .navbar-brand {
+    color: #ffffff;
+}
+
+.navbar-dark .navbar-brand:hover {
+    color: #ffffff;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff;
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #ffffff;
+    font-weight:bold;
+}
+
+.bg-scroll {
+ background-color:  #800000;  
+}
+/* Change navbar styling on scroll */
+/*.navbar.active {
+    background: #555555;
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
+}
+.navbar.active .nav-link {
+    color: #ffffff;
+}
+.navbar.active .nav-link:hover,
+.navbar.active .nav-link:focus {
+    color: #ffffff;
+    text-decoration: none;
+}
+.navbar.active .navbar-brand {
+    color: #ffffff;
+} */
+
+
+.jumbotron{
+ background-color: #800000;   
+}
+.jumbotron h1 {
+
+ font-size: 3rem;
+ 
+color: #ffffff ;
+
+ }
+
+hr.small{
+-webkit-box-shadow: 1px 1px 3px #B38867;
+max-width: 6.25rem;
+margin: 1rem auto;
+border-width: 0.25rem;
+border-color: #B38867;
+border-radius: 0.1875rem;
+}
+
+
+h2,h3,h4,h5 {
+   color: #B38867 ;
+    
+}
+
+.btn-link, .btn-link:hover, .btn-link:focus {
+    color: #B38867;
+    text-decoration: none;
+}
+
+a.text { 
+
+color : #426E86;
+text-decoration:none;
+
+}
+
+a.text:hover {
+color : #426E86;
+text-decoration:none;
+
+font-weight:bold;
+}
+
+
+
