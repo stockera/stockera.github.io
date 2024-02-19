@@ -51,7 +51,8 @@
 <div class="container" style="margin-top:80px">
 	<h2>Code correcteur</h2>
 <p>
-  <label>Rep 1</label>
+	<p> Votre nombre est-il supérieur ou égal à 8 ?</p>
+  <label>Réponse :</label>
   <input id="inputRep1" type="number" placeholder="Rep1" oninput="Rep1=this.value">
 </p>
 
@@ -62,8 +63,9 @@
 <p>Celcius: <button id="outputCelcius" onclick ="Calcul(Rep1,Rep2)"></p>
 
 <script>
-let Rep1
-let Rep2
+let Rep1;
+let Rep2;
+
 function Calcul(valNum1,valNum2) {
   valNum1 = parseFloat(valNum1);
   valNum2 = parseFloat(valNum2);
