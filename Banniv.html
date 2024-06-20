@@ -18,19 +18,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
 	  <script src="../javascript/nav_scroll.js"></script>
 	  <script src="../javascript/gallery.js"></script>
-<!-- Test mdp-->
-
-	<script  type="text/javascript">
-function verifier(){
-	var reponse = document.getElementById('reponse').value;
-if(reponse == 'C'){
-   document.getElementById("resultat").style.color="green";
-} else {
-   document. getElementById("resultat").style.color="red":
-}
-
-	}
-	</script>
 	  
   </head>
   <body>
@@ -81,6 +68,17 @@ if(reponse == 'C'){
    <label for="reponse">Quelle est la capitale du Cameroun</label>
     <input type="text" id="reponse" />
 </p>
+<script  type="text/javascript">
+function verifier(){
+	var reponse = document.getElementById('reponse').value;
+if(reponse == 'C'){
+   document.getElementById("resultat").style.color="green";
+} else {
+   document. getElementById("resultat").style.color="red":
+}
+
+	}
+	</script>
 <input type="button" value="Valider" onclick="verifier();" /></div>
 
 
