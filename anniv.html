@@ -1,9 +1,3 @@
-<?php
-session_start(); 
-if (isset($_SESSION['count']) && ($_SESSION['count'] > 4)) {
-	header('Location: http://www.google.com/');
-} else {
-?> 
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -24,6 +18,14 @@ if (isset($_SESSION['count']) && ($_SESSION['count'] > 4)) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
 	  <script src="../javascript/nav_scroll.js"></script>
 	  <script src="../javascript/gallery.js"></script>
+<!-- Test mdp-->
+	  <SCRIPT>
+<!--
+function AccesProtege() {
+	self.location.href=prompt("Mot de passe :"B"") + "anniv.html";
+	}
+-->
+</SCRIPT>
   </head>
   <body>
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top" id="Nav">
@@ -67,29 +69,10 @@ if (isset($_SESSION['count']) && ($_SESSION['count'] > 4)) {
 <li> La troisième personne (C) s'exclame alors, en direction de B, " Tu es un menteur " ! </li>
 		
 	</ul>
-
-	<?php
-	$password = 'B';
-	if ((isset($_POST['password']) && ($_POST['password'])) != $password) {
-		if (!isset($_SESSION['count'])) {
-			$_SESSION['count'] = 0;
-		} else {
-			$_SESSION['count']++;
-		}
-	?> 
+	
 <p> Sachant que l'apothicaire est un fieffé menteur et que ses apprentis sont d'une honnêteté irréprochable, saurez-vous devinez qui de A, B ou C est l'apothicaire ?</p>
-  
-<form name="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>"> 
-<p><label for="password">L'apothicaire est : </label> <input type="password" title="Saisissez le mot de passe" name="password" /></p> 
-<p><input type="submit" name="submit" value="Connexion" /></p> 
-</form>
-	<?php
-	} else { ?> 
-<p>Voici le texte.</p>
-<?php 
-	}
-} 
-?>
+<p> Si vous avez trouvez <A HREF="javascript:AccesProtege()">cliquez ici</A>.</P> </p>  
+
 </div>
 	
     </div>
