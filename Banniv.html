@@ -27,12 +27,14 @@ function AccesProtege() {
 -->
 </SCRIPT>
 	<script>
+	function verifier(){
 	var reponse = document.getElementById('reponse11').value;
 if(reponse == 'C'){
    document.getElementById("resultat").style.color="green";
 } else {
    document. getElementById("resultat").style.color="red":
 }
+	}
 	</script>
 	  
   </head>
@@ -79,7 +81,7 @@ if(reponse == 'C'){
 <p> Il te gribouille un schéma succinct de ce à quoi ressemble le poison (voir figure) puis te donne la liste des  ingrédients :</p>
 <ul>
 	<li> une mèche de cheveux du Dieu Seth (le prélèvement doit impérativement avoir lieu lorsqu'il est assis);
-    <input type="text" id="reponse11" /> <input type="text" id="reponse12">
+    <input type="button" value="Valider" onclick="verifier();" id="reponse11" /> <input type="text" id="reponse12">
 </p>
 
 	
