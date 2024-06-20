@@ -22,12 +22,13 @@
 
 	<SCRIPT>
 function verifier(){
-	var reponse = document.getElementById("reponse").value;
-	if(reponse == "C"){
-   		document.getElementById("reponse").style.backgroundColor="green";
-	} else {
-  	 document. getElementById("reponse").style.backgroundColor ="red":
-	}
+	var reponse = document.getElementById('reponse').value;
+if(reponse == 'C'){
+   document.getElementById("resultat").style.color="green";
+} else {
+   document. getElementById("resultat").style.color="red":
+}
+
 	}
 	</SCRIPT>
 	  
@@ -75,8 +76,12 @@ function verifier(){
 <p> Il te gribouille un schéma succinct de ce à quoi ressemble le poison (voir figure) puis te donne la liste des  ingrédients :</p>
 <ul>
 	<li> une mèche de cheveux du Dieu Seth (le prélèvement doit impérativement avoir lieu lorsqu'il est assis);
-<div id = "reponse">  <input type="text" >  
-<input type="button" value="Valider" onclick="verifier()" /></div>
+<div id="resultat"></div>
+<p>
+   <label for="reponse">Quelle est la capitale du Cameroun</label>
+    <input type="text" id="reponse" />
+</p>
+<input type="button" value="Valider" onclick="verifier();" /></div>
 
 
 	
