@@ -1,3 +1,9 @@
+<?php
+session_start(); 
+if (isset($_SESSION['count']) && ($_SESSION['count'] > 4)) {
+	header('Location: http://www.google.com/');
+} else {
+?> 
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -44,12 +50,11 @@
 </nav>
 	 
 <div class="jumbotron text-center" style="margin-bottom:0" id="jumb">
-  <h1>Divers</h1>
+  <h1>Chez l'apothicaire</h1>
 	<hr class="small">
  </div>
 	
 <div class="container" style="margin-top:80px">
-	<h2>Chez l'apothicaire</h2>
 <p> Il faudrait être fou pour affronter la Bête sans préparation.</p>
 	<p> Cependant, la rumeur court que la Bête possèderait un point faible : elle serait sensible à un certain poison ! </p>
 <p> Vous vous rendez donc chez l'apothicaire dans l'espoir d'en apprendre plus.
@@ -62,25 +67,9 @@
 <li> La troisième personne (C) s'exclame alors, en direction de B, " Tu es un menteur " ! </li>
 		
 	</ul>
-<p> Sachant que l'apothicaire est un fieffé menteur et que ses apprentis sont d'une honnêteté irréprochable, saurez-vous devinez qui de A, B ou C est l'apothicaire ?</p>
-  
-<?php
-session_start(); 
-if (isset($_SESSION['count']) && ($_SESSION['count'] > 4)) {
-	header('Location: http://www.google.com/');
-} else {
-?> 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<title>Texte</title>
-<style>
-</style>
-</head>
-<body>
+
 	<?php
-	$password = 'motdepasse';
+	$password = 'B';
 	if ((isset($_POST['password']) && ($_POST['password'])) != $password) {
 		if (!isset($_SESSION['count'])) {
 			$_SESSION['count'] = 0;
@@ -88,9 +77,10 @@ if (isset($_SESSION['count']) && ($_SESSION['count'] > 4)) {
 			$_SESSION['count']++;
 		}
 	?> 
-<h1>Connexion</h1>
+<p> Sachant que l'apothicaire est un fieffé menteur et que ses apprentis sont d'une honnêteté irréprochable, saurez-vous devinez qui de A, B ou C est l'apothicaire ?</p>
+  
 <form name="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>"> 
-<p><label for="password">Mot de passe</label> <input type="password" title="Saisissez le mot de passe" name="password" /></p> 
+<p><label for="password">L'apothicaire est : </label> <input type="password" title="Saisissez le mot de passe" name="password" /></p> 
 <p><input type="submit" name="submit" value="Connexion" /></p> 
 </form>
 	<?php
