@@ -59,19 +59,59 @@
 
 	<div class="col-sm-8">
 <div class="container" style="margin-top:80px">
-<p>Félicitation, tu as trouvé l'apothicaire ! Il te révèle son nom : il s'agit du grand Gardiner.</p>
-<p> Il te gribouille un schéma succinct de ce à quoi ressemble le poison (voir figure) puis te donne la liste des  ingrédients :</p>
-<ul>
-	<li> une mèche de cheveux du Dieu Seth (le prélèvement doit impérativement avoir lieu lorsqu'il est assis);
-	</li>
-	<li> un oeuf ;</li>
-	<li> de la pluie tombant du ciel ;</li>
-	<li> une pierre en forme de poire.</li>
-	</ul>
-<p>Cela te semble aussi clair à déchiffrer que des hiéroglyphes mais je suis sûr que tu t'en sortiras ! </p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0 text-center">Compte à rebours</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        
+                        <div class="col-3">
+                            <h3 id="minutes" class="display-4">00</h3>
+                            <p>Minutes</p>
+                        </div>
+                        <div class="col-3">
+                            <h3 id="seconds" class="display-4">00</h3>
+                            <p>Seconds</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p> Une fois découvert la nature de ce poison, rends toi dans ta réserve personnelle pour t'en procurer et découvrir l'indice suivant ! </p>
+<script>
+    // Set the date we're counting down to (1 month from now)
+const countDownDate = new Date().getTime() + (3 * 60 * 1000);
 
+// Update the countdown every 1 second
+const x = setInterval(function() {
+  // Get today's date and time
+  const now = new Date().getTime();
+
+  // Find the distance between now and the countdown date
+  const distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result
+  document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+  document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+
+  // If the countdown is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("minutes").innerHTML = "00";
+    document.getElementById("seconds").innerHTML = "00";
+  }
+}, 1000);
+</script>
 	
 </div>
 	
