@@ -1,1162 +1,173 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-<script>
-	{$(document).ready(function () {
-	var songs = [
-		{
-			title: "rockstar",
-			artist: "Post Malone, 21 Savage",
-			cover: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/rockstar-album-cover.jpg",
-			audioFile: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/Post%20Malone%20-%20rockstar%20ft.%2021%20Savage%20(1).mp3",
-			color: "#c3af50"
-		},
-		{
-			title: "Let You Down",
-			artist: "NF",
-			cover: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/perception-album-cover.png",
-			audioFile: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/NF%20-%20Let%20You%20Down.mp3",
-			color: "#25323b"
-		},
-		{
-			title: "Silence",
-			artist: "Marshmello, Khalid",
-			cover: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/silence-album-cover.jpg",
-			audioFile: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/Marshmello%20-%20Silence%20ft.%20Khalid.mp3",
-			color: "#c1c1c1"
-		},
-		{
-			title: "I Fall Apart",
-			artist: "Post Malone",
-			cover: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/stoney-cover-album.jpg",
-			audioFile: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/Post%20Malone%20-%20I%20Fall%20Apart.mp3",
-			color: "#cd4829"
-		},
-		{
-			title: "Fireproof",
-			artist: "VAX, Teddy Sky",
-			cover: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/fireproof-album-cover.jpeg",
-			audioFile: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/VAX%20-%20Fireproof%20Feat%20Teddy%20Sky.mp3",
-			color: "#5d0126"
-		}
-	];
-	
-	for (let song of songs) {
-		$("#songs").append('<li class="song" data-audio="' + song.audioFile + '" data-color="'+ song.color +'">' + 
-			'<img src="' + song.cover + '">' +
-			'<p class="song-title">' + song.title + '</p>' +
-			'<p class="song-artist">' + song.artist + '</p>' + 
-			'</li>');
-	}
-	
-	$('.jcarousel').jcarousel({
-			wrap: 'circular'
-	});
-});
+<link href='http://fontawesome.io/'>
 
-/*
- * Replace all SVG images with inline SVG
- */
-jQuery('img[src$=".svg"]').each(function(){
-	var $img = jQuery(this);
-	var imgID = $img.attr('id');
-	var imgClass = $img.attr('class');
-	var imgURL = $img.attr('src');
-
-	jQuery.get(imgURL, function(data) {
-		// Get the SVG tag, ignore the rest
-		var $svg = jQuery(data).find('svg');
-
-		// Add replaced image's ID to the new SVG
-		if(typeof imgID !== 'undefined') {
-			$svg = $svg.attr('id', imgID);
-		}
-		// Add replaced image's classes to the new SVG
-		if(typeof imgClass !== 'undefined') {
-			$svg = $svg.attr('class', imgClass+' replaced-svg');
-		}
-
-		// Remove any invalid XML tags as per http://validator.w3.org
-		$svg = $svg.removeAttr('xmlns:a');
-
-		// Replace image with new SVG
-		$img.replaceWith($svg);
-
-	}, 'xml');
-
-});
-
-// Current slide
-$('.jcarousel').on('jcarousel:visiblein', 'li', function(event, carousel) {
-	let cover = $(this).find("img").attr("src");
-	let songTitle = $(this).find("p.song-title").html();
-	let songArtist = $(this).find("p.song-artist").html();
-	let audioSrc = $(this).attr("data-audio");
-	let backgroundColor = $(this).attr("data-color");
-	$("body").css('background', backgroundColor)
-	$("#background").css('background-image', 'url('+cover+')');
-	$("audio").find("source").attr("src", ""+audioSrc+"");
-	player.load();
-	player.currentTime = 0;
-	$("#song-info").find("img").attr("src", cover);
-	$("#song-info .artist-wrap p").find("span.title").html(songTitle);
-	$("#song-info .artist-wrap p").find("span.artist").html(songArtist);
-});
-
-// Previous slide
-$('#previous-btn').click(function() {
-	$('.jcarousel').jcarousel('scroll', '-=1');
-	$('#play-btn i').removeClass('fa-pause');
-	player.pause();
-});
-
-// Next slide
-$('#next-btn').click(function() {
-	if ($(".fa-random").hasClass('active')) {
-		let songs = $("#songs li").length - 1;
-		let randomSong = Math.floor(Math.random() * songs) + 1;
-		$('.jcarousel').jcarousel('scroll', '+=' + randomSong);
-	} else {
-		$('.jcarousel').jcarousel('scroll', '+=1');
-	}
-	$('#play-btn i').removeClass('fa-pause');
-	player.pause();
-});
-
-// Play Icon Switcher
-$('#play-btn').click(function() {
-	$(this).find('i').toggleClass('fa-pause');
-});
-
-// Menu
-$("#menu-btn").click(function() {
-	$("#content-wrap").addClass('inactive');
-	$("#sidemenu").addClass('active');
-});
-
-// Home Button
-$("#home-btn").click(function() {
-	$("#home-screen").addClass('active');
-	$(".menu").removeClass('active');
-	$("#content-wrap").addClass('minimized');
-});
-
-// App
-$(".app-icon").click(function() {
-	$("#content-wrap").removeClass('minimized');
-	setTimeout(function(){ $("#home-screen").removeClass('active'); }, 300);
-});
-
-// Overlay
-$("#overlay").click(function () {
-	$("#content-wrap").removeClass('inactive');
-	$("#sidemenu").removeClass('active');
-});
-
-// Options
-$("#options-btn").click(function() {
-	$("#song-options").addClass('active');
-});
-
-// Bluetooth
-$("#bluetooth-btn").click(function() {
-	$("#bluetooth-devices").addClass('active');
-});
-
-// Bluetooth Menu
-$("#bluetooth-devices ul li").click(function() {
-	$(this).toggleClass('connected');
-	$(this).siblings().removeClass('connected');
-	
-	if ($("#bluetooth-devices ul li").hasClass('connected')) {
-		$("#sub-controls i.fa-bluetooth-b").addClass('active');
-	} else {
-		$("#sub-controls i.fa-bluetooth-b").removeClass('active');
-	}
-});
-
-// Close Menu
-$(".close-btn").click(function() {
-	$(".menu").removeClass('active');
-});
-
-$('#sub-controls i').click(function () {
-	if(!$(this).hasClass('fa-bluetooth-b')) {
-		$(this).toggleClass('active');
-	}
-	
-	if ($("#heart-icon").hasClass('active')) {
-		$("#heart-icon").removeClass('fa-heart-o');
-		$("#heart-icon").addClass('fa-heart');
-	} else {
-		$("#heart-icon").removeClass('fa-heart');
-		$("#heart-icon").addClass('fa-heart-o');
-	}
-});
-
-/*
- * Music Player
- * By Greg Hovanesyan
- * https://codepen.io/gregh/pen/NdVvbm
- */
-
-var audioPlayer = document.querySelector('#content');
-var playpauseBtn = audioPlayer.querySelector('#play-btn');
-var progress = audioPlayer.querySelector('.progress');
-var sliders = audioPlayer.querySelectorAll('.slider');
-var player = audioPlayer.querySelector('audio');
-var currentTime = audioPlayer.querySelector('#current-time');
-var totalTime = audioPlayer.querySelector('#total-time');
-
-var draggableClasses = ['pin'];
-var currentlyDragged = null;
-
-window.addEventListener('mousedown', function(event) {
-  
-  if(!isDraggable(event.target)) return false;
-  
-  currentlyDragged = event.target;
-  let handleMethod = currentlyDragged.dataset.method;
-  
-  this.addEventListener('mousemove', window[handleMethod], false);
-
-  window.addEventListener('mouseup', () => {
-    currentlyDragged = false;
-    window.removeEventListener('mousemove', window[handleMethod], false);
-  }, false);  
-});
-
-playpauseBtn.addEventListener('click', togglePlay);
-player.addEventListener('timeupdate', updateProgress);
-player.addEventListener('loadedmetadata', () => {
-  totalTime.textContent = formatTime(player.duration);
-});
-player.addEventListener('ended', function(){
-  player.currentTime = 0;
-	
-	if ($(".fa-refresh").hasClass('active')) {
-		togglePlay();
-	} else {
-		if ($(".fa-random").hasClass('active')) {
-			let songs = $("#songs li").length - 1;
-			let randomSong = Math.floor(Math.random() * songs) + 1;
-			$('.jcarousel').jcarousel('scroll', '+=' + randomSong);
-		} else {
-			$('.jcarousel').jcarousel('scroll', '+=1');
-		}
-		togglePlay();
-	}
-});
-
-sliders.forEach(slider => {
-  let pin = slider.querySelector('.pin');
-  slider.addEventListener('click', window[pin.dataset.method]);
-});
-
-function isDraggable(el) {
-  let canDrag = false;
-  let classes = Array.from(el.classList);
-  draggableClasses.forEach(draggable => {
-    if(classes.indexOf(draggable) !== -1)
-      canDrag = true;
-  })
-  return canDrag;
-}
-
-function inRange(event) {
-  let rangeBox = getRangeBox(event);
-  let direction = rangeBox.dataset.direction;
-	let screenOffset = document.querySelector("#screen").offsetLeft + 26;
-	var min = screenOffset - rangeBox.offsetLeft;
-	var max = min + rangeBox.offsetWidth;   
-	if(event.clientX < min || event.clientX > max) { return false };
-  return true;
-}
-
-function updateProgress() {
-  var current = player.currentTime;
-  var percent = (current / player.duration) * 100;
-  progress.style.width = percent + '%';
-  
-  currentTime.textContent = formatTime(current);
-}
-
-function getRangeBox(event) {
-  let rangeBox = event.target;
-  let el = currentlyDragged;
-  if(event.type == 'click' && isDraggable(event.target)) {
-    rangeBox = event.target.parentElement.parentElement;
-  }
-  if(event.type == 'mousemove') {
-    rangeBox = el.parentElement.parentElement;
-  }
-  return rangeBox;
-}
-
-function getCoefficient(event) {
-  let slider = getRangeBox(event);
-	let screenOffset = document.querySelector("#screen").offsetLeft + 26;
-  let K = 0;
-	let offsetX = event.clientX - screenOffset;
-	let width = slider.clientWidth;
-	K = offsetX / width;
-  return K;
-}
-
-function rewind(event) {
-  if(inRange(event)) {
-    player.currentTime = player.duration * getCoefficient(event);
-  }
-}
-
-function formatTime(time) {
-  var min = Math.floor(time / 60);
-  var sec = Math.floor(time % 60);
-  return min + ':' + ((sec<10) ? ('0' + sec) : sec);
-}
-
-function togglePlay() {
-	player.volume = 0.5;
-	
-  if(player.paused) {
-    player.play();
-  } else {
-    player.pause();
-  }  
-} 
-	}
-</script>
 <style>
-$iphone-color: white;
-$primary-color: $alizarin;
+@import 'https://fonts.googleapis.com/css?family=Reem+Kufi';
 
 body {
-	color: white;
-	display: flex;
-	align-items: center;
-  justify-content: center;
-	height: 100vh;
-	width: 100vw;
-	background: lighten($alizarin, 15%);
-	font-family: $font;
-	@include transition(background 0.25s ease);
+  background: #fff;
 }
 
-.svg {
-	path {
-		fill: white;
-	}
+
+@keyframes wave {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-h3 {
-	cursor: default;
-	font-weight: 600;
-	font-size: 12px;
-	letter-spacing: 1px;
-	margin: 0 0 15px;
-	text-transform: uppercase;
+.music-card {
+  margin: 100px auto;
+  background: #fff;
+  box-shadow: 0px 8px 28px -9px rgba(0,0,0,0.45);
+  overflow: hidden;
+  position: relative;
+  width: 300px;
+  height: 500px;
+  border-radius: 6px;
 }
 
-p {
-	cursor: default;
-	
-	&.info-text {
-		color: darken(white, 30%);
-		font-size: 10px;
-	}
+.image {
+  background: url('http://static1.squarespace.com/static/530b728de4b04fc9b23a5988/t/569880381a5203aa7d44c1a8/1452834873397/00.jpg?format=1000w') no-repeat 75%;
+  background-size: cover;  
+  position: absolute;
+  z-index: 1;
+  opacity: 0.3;
+  height: 300px;
+  width: 300px;
 }
 
-.fa.add {
-	position: relative;
-	
-	&::after {
-		background: #444444;
-		border-radius: 100px;
-		content: '\f055';
-		font-size: 10px;
-		left: 2px;
-		position: absolute;
-		top: -1px;
-		width: 10px;
-		height: 11px;
-	}
+.image:after {
+  height: 100px;
+  content: '';
+  top: 200px;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  background: linear-gradient(rgba(9, 2, 4, 0), #444);
 }
 
-div#iphone {
-	background: $iphone-color;
-	border: 4px solid darken($iphone-color, 7.5%);
-	border-radius: 30px;
-	max-width: 257px;
-	padding: 10px;
-	@include box-shadow(0px 10px 25px rgba(51, 51, 51, 0.3));
-	
-	div#camera {
-		cursor: default;
-		margin: 5px auto 20px;
-		width: 100%;
-		text-align: center;
-		@include user-select(none);
-		
-		span {
-			background: darken($iphone-color, 7.5%);
-			display: inline-block;
-			
-			&:nth-child(1) {
-				$camera-size: 7px;
-				border-radius: $camera-size;
-				height: $camera-size;
-				margin-right: 7px;
-				position: relative;
-				top: 1px;
-				width: $camera-size;
-			}
-			&:nth-child(2) {
-				border-radius: 5px;
-				height: 5px;
-				width: 35px;
-			}
-		}
-	}
-	
-	div#screen {
-		background: darken($iphone-color, 60%);
-		border: 2px solid darken($iphone-color, 5%);
-		border-radius: 4px;
-		height: 400px;
-		overflow: hidden;
-		position: relative;
-		width: 225px;
-		z-index: 1;
-		
-		&::after {
-			background: darken($iphone-color, 50%);
-			content: '';
-			display: block;
-			height: 130%;
-			left: 60%;
-			opacity: 0.15;
-			position: absolute;
-			pointer-events: none;
-			top: -25%;
-			width: 100%;
-			@include transform(rotate(-20deg));
-		}
-	}
-	
-	div#home-btn {
-		$button-size: 35px;
-		border: 3px solid darken($iphone-color, 7.5%);
-		border-radius: $button-size;
-		cursor: pointer;
-		height: $button-size;
-		margin: 10px auto 5px;
-		width: $button-size;
-	}
+.wave {
+  position: absolute;
+  height: 750px;
+  width: 750px;
+  opacity: 0.6;
+  left: 0;
+  top: 0;
+  margin-left: -70%;
+  margin-top: -130%;
+  background: radial-gradient(#353535, #383737);
 }
 
-div#content-wrap {
-	background: #333;
-	height: 100%;
-	overflow: hidden;
-	position: relative;
-	z-index: 5;
-	@include transition(transform 0.25s ease);
-	
-	&.minimized {
-		@include transform(scale(0));
-	}
-	
-	&.inactive {
-		@include transform(scale(0.85) translate(0, 60%));
-		
-		div#overlay {
-			display: block;
-		}
-	}
+.wave:nth-child(2),
+.wave:nth-child(3) {
+  top: 10px;
 }
 
-div#overlay {
-	cursor: pointer;
-	display: none;
-	height: 100%;
-	left: 0;
-	position: absolute;
-	top: 0;
-	width: 100%;
-	z-index: 3;
+.playing .wave {
+  border-radius: 40%;
+  animation: wave 3000ms infinite linear;
+}
+/* when stop */
+.wave {
+  border-radius: 40%;
+  animation: wave 55s infinite linear;
 }
 
-div#content {
-	padding: 15px;
-	position: relative;
-	z-index: 2;
+.playing .wave:nth-child(2) {
+  animation-duration: 4000ms;
+}
+/* when stop */
+.wave:nth-child(2) {
+  animation-duration: 50s;
 }
 
-div#background {
-	background-size: cover;
-	background-position: center;
-	display: block;
-	height: 100%;
-	left: 0;
-	position: absolute;
-	top: 0;
-	width: 100%;
-	z-index: 1;
-	@include filter(blur, 10px);
-	@include transition(background-image 0.25s ease);
-	
-	&::before {
-		background: #333;
-		content: '';
-		display: block;
-		height: 100%;
-		opacity: 0.5;
-		position: absolute;
-		width: 100%;
-	}
-	
-	&::after {
-		content: '';
-		display: block;
-		height: 100%;
-		position: absolute;
-		width: 100%;
-		@include linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(50, 50, 50, 1) 100%);
-	}
+.playing .wave:nth-child(3) {
+  animation-duration: 5000ms;
+}
+/* when stop */
+.wave:nth-child(3) {
+  animation-duration: 45s;
 }
 
-div#header {
-	color: white;
-	@extend .clearfix;
-	
-	span {
-		cursor: pointer;
-		font-size: 20px;
-		
-		.svg {
-			height: 16px;
-			width: 16px;
-		}
-		
-		&#menu-btn {
-			float: left;
-		}
-		&#options-btn {
-			float: right;
-		}
-	}
+.info {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
 }
 
-div.jcarousel {
-	left: -15px;
-	width: calc(100% + 30px);
-	position: relative;
-	overflow: hidden;
-	
-	ul#songs {
-		width: 20000em;
-		position: relative;
-		
-		li.song {
-			float: left;
-			margin: 10px 15px;
-			text-align: center;
-			width: calc(225px - 30px);
-
-			img {
-				width: 92.5%;
-				@include box-shadow(0px 5px 25px rgba(50, 50, 50, 0.5));
-			}
-
-			p {
-				color: white;
-				text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
-
-				&.song-title {
-					font-size: 16px;
-					font-weight: 600;
-					margin: 10px 0 5px;
-				}
-				&.song-artist {
-					color: darken(white, 30%);
-					font-size: 12px;
-					margin: 0;
-				}
-			}
-		}
-	}
+.title {
+  font-size: 1.4em;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  font-family: 'Reem Kufi', sans-serif;
 }
 
-div#controls {
-	color: white;
-	display: table;
-	margin: 10px auto 25px;
-	text-align: center;
-	width: 75%;
-	
-	span {
-		display: table-cell;
-		font-size: 20px;
-		vertical-align: middle;
-		
-		&#play-btn {
-			font-size: 34px;
-		}
-		
-		i {
-			cursor: pointer;
-		}
-	}
+.artist {
+  color: #cfcfcf;
+  font-size: 1.2em;
+  letter-spacing: 0.08em;
+  font-family: 'Reem Kufi', sans-serif;
+  margin-top: -10px;
 }
 
-div#sub-controls {
-	color: darken(white, 40%);
-	cursor: default;
-	font-size: 14px;
-	margin: 15px 0 0;
-	text-align: center;
-	@include user-select(none);
-	
-	.svg {
-		height: 14px;
-		position: relative;
-		top: 2px;
-		width: 14px;
-		
-		path {
-			fill: darken(white, 40%);
-		}
-	}
-	
-	i, .svg {
-		cursor: pointer;
-		margin: 0 15px;
-		
-		&.active {
-			color: $primary-color;
-		}
-	}
+.fa {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  color: #555;
 }
 
-div#timeline {
-	position: relative;
-	margin: 0 auto;
-	width: 92.5%;
-	
-	span {
-		color: darken(white, 30%);
-		font-size: 7px;
-		position: absolute;
-		top: -10px;
-		
-		&#current-time {
-			left: 0;
-		}
-		&#total-time {
-			right: 0;
-		}
-	}
-	
-	div.slider {
-		background-color: darken(white, 50%);
-		border-radius: 2px;
-		cursor: pointer;
-		height: 2px;
-		position: relative;
-		width: 100%;
-		
-		div.progress {
-			background-color: $primary-color;
-			height: 100%;
-			pointer-events: none;
-			position: absolute;
-			width: 0;
-			
-			div.pin {
-				background-color: white;
-				border-radius: 8px;
-				height: 8px;
-				position: absolute;
-				pointer-events: all;
-				right: -5px;
-				top: -3px;
-				width: 8px;
-				@include box-shadow(0px 1px 1px 0px rgba(0,0,0,0.32));
-				@include transition(transform 0.25s ease);
-				
-				&:active {
-					@include transform(scale(1.5));
-				}
-			}
-		}
-	}
-}
-
-div#sidemenu {
-	background: #444;
-	box-sizing: border-box;
-	height: 100%;
-	left: 0;
-  padding: 20px 10px;
-	position: absolute;
-	top: 0;
-	width: 100%;
-	z-index: 1;
-	
-	&.active {
-		ul {
-			@include transform(scale(1));
-		}
-	}
-	
-	ul {
-		color: white;
-		font-size: 18px;
-		@include transition(transform 0.25s ease);
-		@include transform(scale(0.8));
-		
-		li {
-			cursor: pointer;
-			font-weight: 300;
-			padding: 8px 5px;
-			
-			&:nth-child(1) {
-				margin-top: -8px;
-			}
-			
-			&:hover {
-				background: lighten(#444, 5%);
-				border-radius: 5px;
-				
-				.svg, i {
-					opacity: 1;
-				}
-			}
-		
-			.svg {
-				display: inline-block;
-				height: 16px;
-				padding: 0 0.2em;
-				position: relative;
-				top: 2px;
-				width: 16px;
-			}
-			
-			.svg, i {
-				margin-right: 5px;
-				opacity: 0.75;
-				@include transition(opacity 0.25s ease);
-			}
-		}
-	}
-}
-
-div#song-options {
-	div#song-info {
-		margin: 0 0 20px;
-		position: relative;
-		@extend .clearfix;
-		
-		img {
-			float: left;
-			width: 50px;
-			@include box-shadow(0 2px 5px rgba(50, 50, 50, 0.2));
-		}
-		
-		div.artist-wrap {
-			box-sizing: border-box;
-			float: right;
-			padding: 0 0 0 8px;
-			width: calc(100% - 50px);
-			
-			p {
-				bottom: 4px;
-				font-size: 16px;
-				position: absolute;
-				
-				span {
-					display: block;
-					
-					&.artist {
-						font-size: 12px;
-						font-weight: 300;
-						margin: 4px 0 0;
-					}
-				}
-			}
-		}
-	}
-	
-	ul {
-		font-size: 16px;
-	}
-}
-
-div#bluetooth-devices {
-	ul {
-		margin: 5px 0 15px;
-		
-		li {
-			&.connected {
-				border: 1px solid rgba(255, 255, 255, 0.2);
-				font-size: 14px;
-				
-				span {
-					display: block;
-				}
-				
-				i {
-					color: $primary-color;
-				}
-				
-				.svg path {
-					fill: $primary-color !important;
-				}
-				
-				.svg, i {
-					opacity: 1;
-					position: relative;
-					top: -5px;
-				}
-			}
-			
-			p {
-				display: inline-block;
-				
-				span {
-					display: none;
-					font-size: 10px;
-					margin: 2px 0 0;
-					opacity: 0.75;
-				}
-			}
-		}
-	}
-}
-
-div.menu {
-	background: #444;
-	box-sizing: border-box;
-	display: block;
-	height: 100%;
-	padding: 0 20px;
-	position: absolute;
-	top: 100%;
-	width: 100%;
-	z-index: 10;
-	@include transition(top 0.25s ease);
-	
-	&.active {
-		top: 0;
-	}
-	
-	span.close-btn {
-		color: darken(white, 30%);
-		cursor: pointer;
-		display: block;
-		font-size: 14px;
-		margin: 5px auto 15px;
-		padding: 0 8px 4px;
-		text-align: center;
-		width: 50px;
-		@include transition(color 0.25s ease);
-		
-		&:hover {
-			color: darken(white, 10%);
-		}
-		
-		span {
-			font-size: 1.6em;
-			position: relative;
-			top: 3px;
-		}
-	}
-	
-	li {
-		border-radius: 5px;
-		cursor: pointer;
-		font-weight: 300;
-		margin-bottom: 4px;
-		padding: 8px 5px;
-
-		&:nth-child(1) {
-			margin-top: -8px;
-		}
-
-		&:hover {
-			background: lighten(#444, 5%);
-
-			.svg, i {
-				opacity: 1;
-			}
-		}
-		
-		.svg {
-				display: inline-block;
-				height: 14px;
-				padding: 0 0.2em;
-				position: relative;
-				top: 2px;
-				width: 14px;
-			}
-
-		.svg, i {
-			margin-right: 5px;
-			opacity: 0.75;
-			@include transition(opacity 0.25s ease);
-		}
-		
-		i {
-			position: relative;
-			top: 1px;
-		}
-	}
-}
-
-div#home-screen {
-	@include linear-gradient(to bottom, lighten($wet-asphalt, 15%), lighten($wet-asphalt, 5%));
-	height: 100%;
-	left: 0;
-	position: absolute;
-	top: 0;
-	width: 100%;
-	visibility: hidden;
-	z-index: 2;
-	@extend .flex-center;
-	
-	&.active {
-		visibility: visible;
-	}
-	
-	div.home-content {
-		margin: 15px;
-		padding-bottom: 80px;
-		text-align: center;
-		
-		h2 {
-			font-size: 22px;
-			font-weight: 600;
-		}
-		
-		p {
-			font-size: 13px;
-			line-height: 1.5;
-			margin: 5px 0;
-			
-			&#made-by {
-				
-				a {
-					color: white;
-				}
-			}
-			
-			&#icons-by {
-				color: lighten($wet-asphalt, 30%);
-				bottom: 15px;
-				font-size: 11px;
-				left: 0;
-				position: absolute;
-				text-align: center;
-				width: 100%;
-			}
-			
-			a {
-				color: lighten($wet-asphalt, 40%);
-				border-bottom: 1px solid lighten($wet-asphalt, 30%);
-				text-decoration: none;
-				padding: 0 1px;
-				@include transition(border-color 0.25s ease, color 0.25s ease);
-				
-				&:hover {
-					color: lighten($wet-asphalt, 50%);
-					border-color: lighten($wet-asphalt, 50%);
-				}
-			}
-		}
-		
-		div.app-icon {
-			cursor: pointer;
-			border-radius: 10px;
-			height: 40px;
-			margin: 30px auto 0;
-			position: relative;
-			width: 40px;
-			@extend .flex-center;
-			@include linear-gradient(to bottom, $primary-color, darken($primary-color, 10%));
-			
-			&:hover {
-				@include linear-gradient(to bottom, darken($primary-color, 5%), darken($primary-color, 15%));
-			}
-			
-			&::after {
-				content: 'Music Player';
-				font-size: 10px;
-				position: absolute;
-				top: 45px;
-				white-space: nowrap;
-			}
-			
-			.svg {
-				height: 60%;
-				width: 60%;
-			}
-		}
-	}
+.fa-play {
+  display: none;
 }
 </style>
-  </head>
+
+<script>
+var audio = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/Lecrae_-_Anomaly_(Lyric_Video).mp3');
+audio.volume = 0.1;
+
+
+$('.trigger').click(function() {
+  if (audio.paused == false) {
+      audio.pause();
+      $('.fa-play').show();
+      $('.fa-pause').hide();
+      $('.music-card').removeClass('playing');
+  } else {
+      audio.play();
+      $('.fa-pause').show();
+      $('.fa-play').hide();
+      $('.music-card').addClass('playing');
+  }
+});
+</script>
+</head>
+
 <body>
-<div id="wrapper">
-	<div id="iphone">
-		<div id="camera">
-			<span></span>
-			<span></span>
-		</div>
-		<div id="screen">
-			<div id="content-wrap">
-				<div id="background"></div>
-				<div id="content">
-					<div id="header">
-						<span id="menu-btn"><img src="https://emilcarlsson.se/assets/svg/menu.svg" alt="" class="svg"></span>
-						<span id="options-btn"><img src="https://emilcarlsson.se/assets/svg/more.svg" alt="" class="svg"></span>
-					</div>
-					<div class="jcarousel">
-						<ul id="songs">
-							<li class="song" data-audio="https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/Leo%20-%20Trying.mp3" data-color="#f38578">
-								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/trying-album-cover.jpg">
-								<p class="song-title">Trying</p>
-								<p class="song-artist">Leo</p>
-							</li>
-						</ul>
-					</div>
-					<audio crossorigin>
-						<source src="" type="audio/mpeg">
-					</audio>
-					<div id="controls">
-						<span id="previous-btn"><i class="fa fa-step-backward fa-fw" aria-hidden="true"></i></span>
-						<span id="play-btn"><i class="fa fa-play fa-fw" aria-hidden="true"></i></span>
-						<span id="next-btn"><i class="fa fa-step-forward fa-fw" aria-hidden="true"></i></span>
-					</div>
-					<div id="timeline">
-						<span id="current-time">--:--</span>
-						<span id="total-time">--:--</span>
-						<div class="slider" data-direction="horizontal">
-							<div class="progress">
-								<div class="pin" id="progress-pin" data-method="rewind"></div>
-							</div>
-						</div>
-					</div>
-					<div id="sub-controls">
-						<i class="fa fa-random" aria-hidden="true"></i>
-						<i class="fa fa-refresh" aria-hidden="true"></i>
-						<i class="fa fa-bluetooth-b active" id="bluetooth-btn" aria-hidden="true"></i>
-						<i class="fa fa-heart-o" id="heart-icon" aria-hidden="true"></i>
-					</div>
-				</div>
-				<div id="overlay"></div>
-			</div>
-			<div id="sidemenu">
-				<ul>
-					<li>
-						<i class="fa fa-search fa-fw" aria-hidden="true"></i>
-						Search
-					</li>
-					<li>
-						<img class="svg menu-icons" src="https://emilcarlsson.se/assets/svg/music-player.svg" alt="">
-						Playlists
-					</li>
-					<li>
-						<img id="album-icon" class="svg menu-icons" src="https://emilcarlsson.se/assets/svg/album-icon.svg" alt="">
-						Albums
-					</li>
-					<li>
-						<i class="fa fa-microphone fa-fw" aria-hidden="true"></i>
-						Artists
-					</li>
-					<li>
-						<i class="fa fa-podcast fa-fw" aria-hidden="true"></i>
-						Podcasts
-					</li>
-					<li>
-						<i class="fa fa-cog fa-fw" aria-hidden="true"></i>
-						Settings
-					</li>
-				</ul>
-			</div>
-			<div id="bluetooth-devices" class="menu">
-				<span class="close-btn"><span>&times;</span> Close</span>
-				<h3>Devices nearby</h3>
-				<ul>
-					<li class="connected">
-						<img id="headphones-icon" class="svg menu-icons" src="https://emilcarlsson.se/assets/svg/headphone.svg" alt="">
-						<p>
-							Major II Bluetooth
-							<span>Connected</span>
-						</p>
-					</li>
-					<li>
-						<img id="headphones-icon" class="svg menu-icons" src="https://emilcarlsson.se/assets/svg/loudspeaker.svg" alt="">
-						<p>
-							Sonos One
-							<span>Connected</span>
-						</p>
-					</li>
-					<li>
-						<img id="headphones-icon" class="svg menu-icons" src="https://emilcarlsson.se/assets/svg/car.svg" alt="">
-						<p>
-							Kia Motors
-							<span>Connected</span>
-						</p>
-					</li>
-				</ul>
-				<p class="info-text">
-					Make sure your bluetooth device is turned on and in range.
-				</p>
-			</div>
-			<div id="song-options" class="menu">
-				<span class="close-btn"><span>&times;</span> Close</span>
-				<div id="song-info">
-					<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/rockstar-album-cover.jpg" alt="">
-					<div class="artist-wrap">
-						<p>
-							<span class="title">rockstar</span>
-							<span class="artist">Post Malone, 21 Savage</span>
-						</p>
-					</div>
-				</div>
-				<ul>
-					<li>
-						<i class="fa fa-music fa-fw add" aria-hidden="true"></i>
-						Add to playlist
-					</li>
-					<li>
-						<i class="fa fa-microphone fa-fw" aria-hidden="true"></i>
-						View Artist
-					</li>
-					<li>
-						<img id="album-icon" class="svg menu-icons" src="https://emilcarlsson.se/assets/svg/compact-disc.svg" alt="">
-						View Album
-					</li>
-					<li>
-						<i class="fa fa-share-square-o fa-fw" aria-hidden="true"></i>
-						Share
-					</li>
-				</ul>
-			</div>
-			<div id="home-screen">
-				<div class="home-content">
-					<h2>Music Player App</h2>
-					<p id="made-by">Made by <a href="https://codepen.io/emilcarlsson">@emilcarlsson</a></p>
-					<div class="app-icon">
-						<img class="svg" src="https://emilcarlsson.se/assets/svg/music-note.svg" alt="">
-					</div>
-					<p id="icons-by">Icons by <a href="http://fontawesome.io/" title="Font Awesome">Font Awesome</a>, <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a>,<br /><a href="https://www.flaticon.com/authors/epiccoders" title="EpicCoders">EpicCoders</a> & <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a></p>
-				</div>
-			</div>
-		</div>
-		<div id="home-btn"></div>
-	</div>
+<div class='music-card playing'>
+  
+  <div class='image'></div>
+  
+  <div class='wave'></div>
+  <div class='wave'></div>
+  <div class='wave'></div>
+  
+  <div class='info'>
+    <h2 class='title'>Anomaly</h2>
+    <div class='artist'>Lecrae</div>
+  </div>
+  
+  <i class="fa fa-pause trigger" aria-hidden="true"></i>
+  <i class="fa fa-play trigger" aria-hidden="true"></i>
 </div>
+
+
 </body>
 </html>
